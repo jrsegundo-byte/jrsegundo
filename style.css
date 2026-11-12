@@ -101,3 +101,19 @@ blockquote { margin-top: 1.6rem; padding: 1.2rem 1.4rem; border-left: 4px solid 
   .parents img { max-width: 140px; }
   .btn { padding: .75rem 1.2rem; font-size: .9rem; }
 }
+
+/* FIX: Make the profile photo visible */
+.photo-frame {
+    width: 100%;
+    height: 440px;
+    overflow: hidden;
+    background: #e6e9e2;
+}
+
+.photo-frame .profile-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
