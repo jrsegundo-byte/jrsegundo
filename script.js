@@ -1,6 +1,8 @@
 
 
+
 // GET ALL PORTFOLIO ELEMENTS
+
 const pages = [...document.querySelectorAll('.page')];
 
 const prev = document.getElementById('prev');
@@ -10,10 +12,13 @@ const dots = document.querySelector('.dots');
 
 let current = 0;
 
+
 // CHECK IF ELEMENTS EXIST
+
 if (pages.length && prev && next && counter && dots) {
 
     // CREATE NAVIGATION DOTS
+
     pages.forEach((page, index) => {
 
         const button = document.createElement('button');
@@ -37,6 +42,7 @@ if (pages.length && prev && next && counter && dots) {
 
 
     // CHANGE PAGE
+
     function go(index) {
 
         if (
@@ -63,7 +69,8 @@ if (pages.length && prev && next && counter && dots) {
             direction
         );
 
-        // RESET CARD SCROLL POSITION
+        // RESET CARD POSITION
+
         const card = pages[current].querySelector('.card');
 
         if (card) {
@@ -71,10 +78,12 @@ if (pages.length && prev && next && counter && dots) {
         }
 
         update();
+
     }
 
 
     // UPDATE NAVIGATION
+
     function update() {
 
         counter.textContent =
@@ -97,6 +106,7 @@ if (pages.length && prev && next && counter && dots) {
         }
 
         // UPDATE DOTS
+
         [...dots.children].forEach((dot, index) => {
 
             dot.classList.toggle(
@@ -115,6 +125,7 @@ if (pages.length && prev && next && counter && dots) {
 
 
     // NEXT BUTTON
+
     next.addEventListener('click', () => {
 
         if (current === pages.length - 1) {
@@ -127,6 +138,7 @@ if (pages.length && prev && next && counter && dots) {
 
 
     // BACK BUTTON
+
     prev.addEventListener('click', () => {
 
         go(current - 1);
@@ -135,9 +147,9 @@ if (pages.length && prev && next && counter && dots) {
 
 
     // KEYBOARD NAVIGATION
+
     document.addEventListener('keydown', (event) => {
 
-        // Do not navigate while typing
         if (
             event.target.matches('input, textarea, select') ||
             event.target.isContentEditable
@@ -164,7 +176,8 @@ if (pages.length && prev && next && counter && dots) {
     });
 
 
-    // START WEBSITE
+    // INITIALIZE WEBSITE
+
     update();
 
 }
