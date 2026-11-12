@@ -1,25 +1,36 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap');
 
-/* ==============================
-   GLOBAL SETTINGS
-============================== */
+/* =========================================
+   LAURENCE SEGUNDO JR. — PORTFOLIO
+   COMPLETE CONNECTED STYLE.CSS
+========================================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* =========================================
+   1. ROOT COLORS
+========================================= */
 
 :root {
-    --dark: #071d16;
-    --green: #103c2b;
-    --light-green: #1c6045;
-    --gold: #d9b76e;
-    --cream: #f5efdf;
-    --white: #ffffff;
-    --muted: #b9c8bd;
+    --bg: #16241a;
+    --ink: #f3ead8;
+    --muted: #b9b29f;
+    --rice: #d8b45a;
+    --leaf: #8fbf7a;
+    --card: rgba(22, 36, 26, 0.82);
+    --line: rgba(243, 234, 216, 0.14);
+}
+
+/* =========================================
+   2. GLOBAL SETTINGS
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
@@ -30,190 +41,378 @@ body {
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
-    color: var(--cream);
-    background:
-        radial-gradient(circle at top right, #24583e, transparent 40%),
-        linear-gradient(135deg, var(--dark), var(--green));
+    font-family: 'Outfit', system-ui, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(
+        ellipse at 70% 10%,
+        #2a3f2c 0%,
+        var(--bg) 60%
+    );
+    display: flex;
+    flex-direction: column;
 }
 
-/* ==============================
-   NAVIGATION
-============================== */
+/* =========================================
+   3. BACKGROUND
+========================================= */
 
-header {
+.terraces {
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    padding: 1rem 5%;
+    height: 45vh;
+    z-index: 0;
+    opacity: .9;
+    pointer-events: none;
+}
+
+/* =========================================
+   4. HEADER
+========================================= */
+
+.topbar,
+.controls {
+    position: relative;
+    z-index: 2;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
+    padding: 1.1rem clamp(1rem, 4vw, 3rem);
 }
 
-header h1,
-.logo {
-    color: var(--gold);
+.brand {
     font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: -.02em;
 }
 
-nav {
+.dot {
+    color: var(--rice);
+}
+
+/* =========================================
+   5. NAVIGATION DOTS
+========================================= */
+
+.dots {
     display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
+    gap: .5rem;
 }
 
-nav button,
-.nav-btn {
+.dots button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--muted);
     background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--cream);
-    padding: 0.6rem 1rem;
-    border-radius: 30px;
     cursor: pointer;
-    font-family: 'Outfit', sans-serif;
-    transition: 0.3s;
+    transition: .3s;
 }
 
-nav button:hover,
-nav button.active,
-.nav-btn:hover {
-    background: var(--gold);
-    color: var(--dark);
+.dots button.on {
+    background: var(--rice);
+    border-color: var(--rice);
+    width: 28px;
+    border-radius: 6px;
 }
 
-/* ==============================
-   PAGE DECK
-============================== */
+/* =========================================
+   6. PAGE SYSTEM
+========================================= */
 
 .deck {
     position: relative;
-    width: 100%;
-    height: calc(100vh - 130px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 4%;
+    z-index: 1;
+    flex: 1;
+    min-height: 0;
 }
 
 .page {
+    position: absolute;
+    inset: 0;
     display: none;
-    width: 100%;
-    height: 100%;
     align-items: center;
     justify-content: center;
+    padding: 0 clamp(1rem, 4vw, 3rem);
 }
 
 .page.active {
     display: flex;
 }
 
-/* ==============================
-   MAIN CARD
-============================== */
-
-.card {
-    width: 100%;
-    max-width: 1100px;
-    max-height: 100%;
-    margin: auto;
-    padding: 2rem;
-    border: 1px solid rgba(217, 183, 110, 0.4);
-    border-radius: 22px;
-    background: rgba(7, 29, 22, 0.82);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    overflow-y: auto;
+.page.from-right {
+    animation: inR .5s cubic-bezier(.2,.8,.2,1);
 }
 
+.page.from-left {
+    animation: inL .5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes inR {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+}
+
+@keyframes inL {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+}
+
+/* =========================================
+   7. TEXT
+========================================= */
+
 .kicker {
-    color: var(--gold);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    margin-bottom: 0.8rem;
+    color: var(--leaf);
+    font-size: .85rem;
+    margin-bottom: .6rem;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Fraunces', serif;
+}
+
+h1 {
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    line-height: .95;
+    font-weight: 900;
+    letter-spacing: -.03em;
 }
 
 h2 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--gold);
-    margin-bottom: 1rem;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 900;
+    margin-bottom: 1.2rem;
+    letter-spacing: -.02em;
 }
 
 h3 {
-    color: var(--gold);
-    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: .7rem;
 }
 
-p {
+a {
+    color: var(--rice);
+    text-decoration: none;
+}
+
+/* =========================================
+   8. HOME PAGE
+========================================= */
+
+.home {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 5vw, 4.5rem);
+    max-width: 1000px;
+}
+
+.photo-frame {
+    flex-shrink: 0;
+    width: clamp(160px, 26vw, 300px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 8px;
+    background: conic-gradient(
+        var(--rice),
+        var(--leaf),
+        var(--rice)
+    );
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    overflow: hidden;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 6px solid var(--bg);
+    display: block;
+}
+
+.role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    margin-top: 1rem;
+    color: var(--rice);
+}
+
+.caret {
+    color: var(--leaf);
+}
+
+.blink {
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   9. CONTACTS
+========================================= */
+
+.contacts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: 1.8rem;
+}
+
+.contacts a {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(0,0,0,.25);
+    color: var(--ink);
+    font-size: .9rem;
+    transition: .25s;
+}
+
+.contacts a:hover {
+    border-color: var(--rice);
+    color: var(--rice);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   10. CARDS
+========================================= */
+
+.card {
+    width: 100%;
+    max-width: 720px;
+    max-height: 100%;
+    overflow-y: auto;
+    background: var(--card);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: clamp(1.4rem, 4vw, 2.6rem);
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+}
+
+.card.wide {
+    max-width: 1100px;
+}
+
+.card > p:not(.kicker) {
     color: var(--muted);
     line-height: 1.6;
 }
 
-/* ==============================
-   HOME SECTION
-============================== */
+/* =========================================
+   11. PERSONAL INFORMATION
+========================================= */
 
-.home-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.home-text {
-    flex: 1;
-}
-
-.home-text h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    color: var(--gold);
-}
-
-.profile-photo {
-    width: 260px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 20px;
-    border: 3px solid var(--gold);
-}
-
-/* ==============================
-   ABOUT ME
-============================== */
-
-.about-content {
+.info {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: .1rem;
+    margin-bottom: 1.6rem;
 }
 
-.about-content article {
-    padding: 1.3rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
+.info div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    padding: .65rem 0;
+    border-bottom: 1px dashed var(--line);
 }
 
-/* ==============================
-   EDUCATION
-============================== */
+.info dt {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* =========================================
+   12. INTERESTS
+========================================= */
+
+.tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: .8rem;
+}
+
+.tags li {
+    padding: .5rem 1rem;
+    border-radius: 12px;
+    background: rgba(216,180,90,.12);
+    border: 1px solid rgba(216,180,90,.3);
+}
+
+/* =========================================
+   13. EDUCATION
+========================================= */
+
+.school {
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: rgba(143,191,122,.1);
+    border: 1px solid rgba(143,191,122,.3);
+    margin-bottom: 1.4rem;
+}
+
+.school p {
+    color: var(--muted);
+    margin-top: .3rem;
+}
+
+.badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: var(--leaf);
+    color: var(--bg);
+    padding: .2rem .6rem;
+    border-radius: 6px;
+    margin-bottom: .6rem;
+}
+
+/* EDUCATIONAL ACHIEVEMENTS HORIZONTAL */
 
 .education-card {
     max-width: 1100px;
-    padding: 1.5rem 2rem;
+    overflow: hidden;
 }
 
 .education-achievements {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
+    gap: 1.2rem;
+    align-items: stretch;
 }
 
 .education-achievements article {
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: rgba(143,191,122,.1);
+    border: 1px solid rgba(143,191,122,.3);
     text-align: center;
-    padding: 1.3rem;
-    border: 1px solid rgba(217, 183, 110, 0.35);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.04);
 }
 
 .education-achievements img {
@@ -221,225 +420,356 @@ p {
     max-width: 170px;
     height: 120px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-top: 0.8rem;
+    border-radius: 12px;
+    margin-top: .8rem;
 }
 
-/* ==============================
-   ACHIEVEMENTS
-============================== */
+/* =========================================
+   14. TIMELINE
+========================================= */
+
+.timeline {
+    list-style: none;
+    border-left: 2px solid var(--rice);
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 1.1rem;
+}
+
+.timeline li {
+    position: relative;
+}
+
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: calc(-1.4rem - 7px);
+    top: .35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--rice);
+}
+
+.yr {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--rice);
+    font-size: .8rem;
+}
+
+.timeline strong {
+    font-size: 1.15rem;
+}
+
+.timeline p {
+    color: var(--muted);
+    margin: .25rem 0;
+}
+
+/* =========================================
+   15. ACHIEVEMENTS
+========================================= */
 
 .achievements-card {
     max-width: 1100px;
-    padding: 1.5rem 2rem;
+    overflow: hidden;
 }
+
+/* Two horizontal achievement cards */
 
 .awards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
+    gap: 1.2rem;
     align-items: stretch;
 }
 
 .awards article {
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: rgba(0,0,0,.25);
+    border: 1px solid var(--line);
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: center;
-    padding: 1.3rem;
-    border: 1px solid rgba(217, 183, 110, 0.35);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.04);
+    transition: .3s;
 }
+
+.awards article:hover {
+    border-color: var(--rice);
+    transform: translateY(-4px);
+}
+
+.awards h3 {
+    margin-top: .5rem;
+}
+
+.awards p {
+    color: var(--muted);
+    margin-top: .4rem;
+    font-size: .95rem;
+    line-height: 1.5;
+}
+
+/* MEDAL ICON */
+
+.medal {
+    font-size: 2.4rem;
+    margin-bottom: .6rem;
+}
+
+/* ACHIEVEMENT PHOTO */
 
 .small-photo {
     width: 100%;
     max-width: 150px;
     aspect-ratio: 4 / 3;
-    margin: 0.8rem auto 0;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 12px;
+    margin: .8rem auto 0;
 }
 
 .small-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-/* ==============================
-   FAMILY AND FRIENDS
-============================== */
+/* =========================================
+   16. PHOTO HOLDERS
+========================================= */
+
+.photo-holder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 2px dashed #82917e;
+    border-radius: 12px;
+    background: rgba(255,255,255,.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: .7rem;
+}
+
+.photo-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.achievement-photo {
+    max-width: 400px;
+    margin-top: 15px;
+}
+
+/* =========================================
+   17. FAMILY AND FRIENDS
+========================================= */
 
 .family-card {
     max-width: 1100px;
-    padding: 1.5rem 2rem;
+    overflow: hidden;
 }
+
+/* Four pictures in one horizontal row */
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 18px;
+    align-items: start;
+}
+
+.photo-item {
+    min-width: 0;
+    text-align: center;
+    padding: .6rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(0,0,0,.2);
+}
+
+.photo-item h4 {
+    margin: 8px 0 4px;
+    font-family: 'Fraunces', serif;
+    color: var(--rice);
+}
+
+.photo-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.photo-grid .photo-holder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin-top: .5rem;
+}
+
+.photo-grid .photo-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Also supports family-friends class */
 
 .family-friends {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.2rem;
+    gap: 1rem;
     align-items: start;
 }
 
 .family-friends article {
-    text-align: center;
     min-width: 0;
-    padding: 0.7rem;
-    border: 1px solid rgba(217, 183, 110, 0.3);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.04);
+    text-align: center;
+    padding: .6rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(0,0,0,.2);
 }
 
 .family-friends img {
     width: 100%;
-    height: 160px;
+    height: 145px;
     object-fit: cover;
     border-radius: 12px;
-    margin-bottom: 0.7rem;
 }
 
-/* ==============================
-   BUTTONS
-============================== */
-
-button {
-    font-family: 'Outfit', sans-serif;
+.family-friends h3 {
+    color: var(--rice);
+    margin-top: .7rem;
 }
 
-button:hover {
-    transform: translateY(-2px);
+/* =========================================
+   18. FAMILY MESSAGE
+========================================= */
+
+blockquote {
+    margin-top: 1.6rem;
+    padding: 1.2rem 1.4rem;
+    border-left: 4px solid var(--rice);
+    background: rgba(216,180,90,.08);
+    border-radius: 0 14px 14px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.5;
 }
 
-button:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-}
+/* =========================================
+   19. BUTTONS
+========================================= */
 
-/* ==============================
-   FOOTER / PAGE CONTROLS
-============================== */
-
-footer {
-    width: 100%;
-    padding: 0.8rem 4%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-
-footer button {
-    background: var(--gold);
-    color: var(--dark);
+.btn {
+    font: 600 1rem 'Outfit', sans-serif;
+    padding: .85rem 1.6rem;
+    border-radius: 999px;
     border: none;
-    border-radius: 25px;
-    padding: 0.7rem 1.4rem;
+    background: var(--rice);
+    color: var(--bg);
     cursor: pointer;
-    font-weight: 600;
+    transition: .25s;
 }
 
-/* ==============================
-   TABLET
-============================== */
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(216,180,90,.35);
+}
 
-@media (max-width: 850px) {
-    header {
+.btn.ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+}
+
+.btn:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.counter {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* =========================================
+   20. MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 700px) {
+
+    .home {
         flex-direction: column;
+        text-align: center;
+        gap: 1.2rem;
     }
 
-    .deck {
-        height: calc(100vh - 160px);
-        padding: 0.7rem 2%;
-    }
-
-    .card {
-        padding: 1.3rem;
-    }
-
-    .family-friends img {
-        height: 130px;
-    }
-
-    .profile-photo {
-        width: 210px;
-        height: 250px;
-    }
-}
-
-/* ==============================
-   MOBILE
-============================== */
-
-@media (max-width: 600px) {
-    html,
-    body {
-        overflow: hidden;
-    }
-
-    header {
-        padding: 0.7rem;
-    }
-
-    nav {
+    .contacts {
         justify-content: center;
     }
 
-    nav button {
-        padding: 0.45rem 0.7rem;
-        font-size: 0.75rem;
+    .contacts a {
+        padding: .7rem;
     }
 
-    .deck {
-        height: calc(100vh - 175px);
-        padding: 0.5rem;
-    }
-
-    .card {
-        padding: 1rem;
-        border-radius: 15px;
-    }
-
-    .home-content {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-
-    .profile-photo {
-        width: 150px;
-        height: 170px;
-    }
-
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-
-    .awards,
-    .education-achievements {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.6rem;
-    }
-
-    .awards article,
-    .education-achievements article {
-        padding: 0.7rem;
-    }
-
+    .photo-grid,
     .family-friends {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.7rem;
+    }
+
+    .photo-grid .photo-holder {
+        aspect-ratio: 4 / 3;
     }
 
     .family-friends img {
-        height: 110px;
+        height: 120px;
+    }
+
+    .btn {
+        padding: .75rem 1.2rem;
+        font-size: .9rem;
+    }
+}
+
+/* =========================================
+   21. SHORT SCREEN SUPPORT
+========================================= */
+
+@media (max-height: 720px) {
+
+    .page {
+        padding-top: .4rem;
+        padding-bottom: .4rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+    }
+
+    .kicker {
+        margin-bottom: .4rem;
     }
 
     h2 {
-        font-size: 1.7rem;
+        margin-bottom: .7rem;
     }
 
-    p {
-        font-size: 0.85rem;
+    .photo-grid {
+        margin-top: 10px;
+    }
+
+    .photo-grid .photo-holder {
+        max-height: 120px;
     }
 }
