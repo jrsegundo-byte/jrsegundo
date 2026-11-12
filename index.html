@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,76 +16,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="style.css" />
-
-<style>
-/* Image holders */
-.photo-holder {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border: 2px dashed #82917e;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.photo-holder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.photo-holder img:not([src]),
-.photo-holder img[src=""] {
-    display: none;
-}
-
-.photo-holder:has(img[src=""])::after {
-    content: "Add your picture here";
-    color: #aab5a5;
-    font-size: 13px;
-}
-
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px;
-    margin-top: 18px;
-}
-
-.photo-item {
-    min-width: 0;
-}
-
-.photo-item h4 {
-    margin: 8px 0 4px;
-}
-
-.photo-item p {
-    margin: 0;
-    font-size: 13px;
-}
-
-.achievement-photo {
-    max-width: 400px;
-    margin-top: 15px;
-}
-
-@media (max-width: 600px) {
-    .photo-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
 </head>
 
 <body>
 
-<!-- Background: Ifugao rice terraces -->
+<!-- BACKGROUND -->
 <svg class="terraces" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 160 Q360 110 720 150 T1440 130 V400 H0Z" fill="#24382a"/>
     <path d="M0 220 Q360 175 720 210 T1440 195 V400 H0Z" fill="#2c4632"/>
@@ -92,6 +28,7 @@
     <path d="M0 335 Q360 300 720 325 T1440 315 V400 H0Z" fill="#3f6546"/>
 </svg>
 
+<!-- HEADER -->
 <header class="topbar">
     <span class="brand">LS<span class="dot">.</span>jr</span>
     <nav class="dots" aria-label="Pages"></nav>
@@ -99,338 +36,308 @@
 
 <main class="deck">
 
-<!-- 1. HOME -->
-<section class="page active" data-title="Home">
+    <!-- 1. HOME -->
+    <section class="page active" data-title="Home">
 
-    <div class="home">
+        <div class="home">
 
-        <div class="photo-frame">
-            <img src="images/profile.jpg" alt="Photo of Laurence Segundo Jr." />
+            <div class="photo-frame">
+                <img src="images/profile.jpg" alt="Photo of Laurence Segundo Jr." />
+            </div>
+
+            <div class="home-text">
+
+                <p class="kicker">// hello, world — I'm</p>
+
+                <h1>Laurence<br />Segundo Jr.</h1>
+
+                <p class="role">
+                    <span class="caret">&gt;</span>
+                    Beginner Developer
+                    <span class="blink">_</span>
+                </p>
+
+                <ul class="contacts">
+
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+                            <span>Facebook</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="mailto:jrsegundo804@gmail.com">
+                            <span>jrsegundo804@gmail.com</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="tel:+639927695272">
+                            <span>0992 769 5272</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
         </div>
+    </section>
 
-        <div class="home-text">
 
-            <p class="kicker">// hello, world — I'm</p>
+    <!-- 2. ABOUT ME -->
+    <section class="page" data-title="About Me">
 
-            <h1>Laurence<br />Segundo Jr.</h1>
+        <div class="card">
 
-            <p class="role">
-                <span class="caret">&gt;</span>
-                Beginner Developer
-                <span class="blink">_</span>
-            </p>
+            <p class="kicker">// 01 — personal info</p>
 
-            <ul class="contacts">
+            <h2>About Me</h2>
+
+            <dl class="info">
+
+                <div>
+                    <dt>Name</dt>
+                    <dd>Laurence Segundo Jr.</dd>
+                </div>
+
+                <div>
+                    <dt>Age</dt>
+                    <dd>18 years old</dd>
+                </div>
+
+                <div>
+                    <dt>Birthday</dt>
+                    <dd>September 9, 2008</dd>
+                </div>
+
+                <div>
+                    <dt>From</dt>
+                    <dd>Ifugao, Philippines</dd>
+                </div>
+
+                <div>
+                    <dt>Email</dt>
+                    <dd>
+                        <a href="mailto:jrsegundo804@gmail.com">
+                            jrsegundo804@gmail.com
+                        </a>
+                    </dd>
+                </div>
+
+            </dl>
+
+            <h3>Things I Love</h3>
+
+            <ul class="tags">
+                <li>🎌 Watching anime</li>
+                <li>🎮 Playing online games</li>
+                <li>💻 Computers &amp; technology</li>
+            </ul>
+
+        </div>
+    </section>
+
+
+    <!-- 3. EDUCATION -->
+    <section class="page" data-title="Education">
+
+        <div class="card">
+
+            <p class="kicker">// 02 — educational achievements</p>
+
+            <h2>Education</h2>
+
+            <div class="school">
+                <span class="badge">Graduated</span>
+                <h3>Namillangan Elementary School</h3>
+                <p>Elementary Education</p>
+            </div>
+
+            <div class="school">
+                <span class="badge">Graduated</span>
+                <h3>Namillangan National High School</h3>
+                <p>Senior High School · Grades 11 &amp; 12</p>
+            </div>
+
+            <ul class="timeline">
 
                 <li>
-                    <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6Z"/>
-                        </svg>
-                        <span>Facebook</span>
-                    </a>
+                    <span class="yr">Grade 11</span>
+                    <strong>With Honors</strong>
+                    <p>Recognized for academic excellence.</p>
+
+                    <div class="photo-holder achievement-photo">
+                        <img src="images/grade11-achievement.jpg" alt="Grade 11 academic achievement photo" />
+                    </div>
                 </li>
 
                 <li>
-                    <a href="mailto:jrsegundo804@gmail.com" aria-label="Email">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M3 5h18v14H3V5Zm2 2v.5l7 4.5 7-4.5V7H5Zm14 2.9-7 4.5-7-4.5V17h14V9.9Z"/>
-                        </svg>
-                        <span>jrsegundo804@gmail.com</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="tel:+639927695272" aria-label="Phone">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/>
-                        </svg>
-                        <span>0992 769 5272</span>
-                    </a>
+                    <span class="yr">Grade 12</span>
+                    <strong>With Honors</strong>
+                    <p>Kept up strong grades through graduation.</p>
                 </li>
 
             </ul>
-        </div>
-    </div>
-</section>
-
-
-<!-- 2. PERSONAL INFO -->
-<section class="page" data-title="About Me">
-
-    <div class="card">
-
-        <p class="kicker">// 01 — personal info</p>
-
-        <h2>About Me</h2>
-
-        <dl class="info">
-
-            <div>
-                <dt>Name</dt>
-                <dd>Laurence Segundo Jr.</dd>
-            </div>
-
-            <div>
-                <dt>Age</dt>
-                <dd>18 years old</dd>
-            </div>
-
-            <div>
-                <dt>Birthday</dt>
-                <dd>September 9, 2008</dd>
-            </div>
-
-            <div>
-                <dt>From</dt>
-                <dd>Ifugao, Philippines</dd>
-            </div>
-
-            <div>
-                <dt>Email</dt>
-                <dd>
-                    <a href="mailto:jrsegundo804@gmail.com">
-                        jrsegundo804@gmail.com
-                    </a>
-                </dd>
-            </div>
-
-        </dl>
-
-        <h3>Things I Love</h3>
-
-        <ul class="tags">
-            <li>🎌 Watching anime</li>
-            <li>🎮 Playing online games</li>
-            <li>💻 Computers &amp; technology</li>
-        </ul>
-
-    </div>
-</section>
-
-
-<!-- 3. EDUCATIONAL ACHIEVEMENTS -->
-<section class="page" data-title="Education">
-
-    <div class="card">
-
-        <p class="kicker">// 02 — educational achievements</p>
-
-        <h2>Education</h2>
-
-        <!-- ELEMENTARY -->
-        <div class="school">
-
-            <span class="badge">Graduated</span>
-
-            <h3>Namillangan Elementary School</h3>
-
-            <p>Elementary Education</p>
 
         </div>
+    </section>
 
-        <!-- HIGH SCHOOL -->
-        <div class="school">
 
-            <span class="badge">Graduated</span>
+    <!-- 4. ACHIEVEMENTS -->
+    <section class="page" data-title="Achievements">
 
-            <h3>Namillangan National High School</h3>
+        <div class="card">
 
-            <p>Senior High School · Grades 11 &amp; 12</p>
+            <p class="kicker">// 03 — other achievements</p>
 
+            <h2>Other Achievements</h2>
+
+            <div class="awards">
+
+                <article>
+                    <div class="medal">🏆</div>
+                    <h3>Best in Athlete Award</h3>
+                    <p>Grade 11 &amp; Grade 12 · Namillangan National High School</p>
+                </article>
+
+                <article>
+                    <div class="medal">🤸</div>
+                    <h3>Gymnastics Achievement</h3>
+
+                    <p>
+                        I started competing in gymnastics when I was in Grade 4.
+                        Since then, I have continued joining competitions and
+                        representing my school in different sporting events.
+                        I also became a CARAA qualifier and medalist.
+                    </p>
+
+                    <div class="photo-holder achievement-photo">
+                        <img src="images/gymnastics.jpg" alt="Gymnastics competition achievement" />
+                    </div>
+                </article>
+
+                <article>
+                    <div class="medal">🏆</div>
+                    <h3>MILO Cheerdance Championship</h3>
+
+                    <p>
+                        Participated in the MILO Cheerdance Championship and
+                        gained valuable experience through teamwork,
+                        dedication, and performance.
+                    </p>
+
+                    <div class="photo-holder achievement-photo">
+                        <img src="images/milo-cheerdance.jpg" alt="MILO Cheerdance Championship achievement" />
+                    </div>
+                </article>
+
+            </div>
         </div>
+    </section>
 
-        <ul class="timeline">
 
-            <li>
-                <span class="yr">Grade 11</span>
+    <!-- 5. FAMILY AND FRIENDS -->
+    <section class="page" data-title="Family & Friends">
 
-                <strong>With Honors</strong>
+        <div class="card wide">
 
-                <p>Recognized for academic excellence.</p>
+            <p class="kicker">// 04 — the people behind my journey</p>
 
-                <!-- GRADE 11 PHOTO -->
-                <div class="photo-holder achievement-photo">
-                    <img src="images/grade11-achievement.jpg"
-                         alt="Grade 11 academic achievement photo" />
+            <h2>Family &amp; Friends</h2>
+
+            <p>
+                My family and friends are important parts of my life.
+                They give me support, happiness, and inspiration.
+                They make every experience more meaningful and memorable.
+            </p>
+
+            <!-- PARENTS -->
+            <h3>My Parents</h3>
+
+            <div class="photo-grid">
+
+                <div class="photo-item">
+
+                    <div class="photo-holder">
+                        <img src="images/father.jpg" alt="Laurence C. Segundo" />
+                    </div>
+
+                    <h4>Laurence C. Segundo</h4>
+                    <p>Father · A hardworking father</p>
+
                 </div>
 
-            </li>
+                <div class="photo-item">
 
-            <li>
-                <span class="yr">Grade 12</span>
+                    <div class="photo-holder">
+                        <img src="images/mother.jpg" alt="Maricel S. Segundo" />
+                    </div>
 
-                <strong>With Honors</strong>
+                    <h4>Maricel S. Segundo</h4>
+                    <p>Mother · A loving mother</p>
 
-                <p>Kept up strong grades through graduation.</p>
-
-            </li>
-
-        </ul>
-
-    </div>
-</section>
-
-
-<!-- 4. OTHER ACHIEVEMENTS -->
-<section class="page" data-title="Achievements">
-
-    <div class="card">
-
-        <p class="kicker">// 03 — other achievements</p>
-
-        <h2>Other Achievements</h2>
-
-        <div class="awards">
-
-            <!-- BEST IN ATHLETE -->
-            <article>
-
-                <div class="medal">🏆</div>
-
-                <h3>Best in Athlete Award</h3>
-
-                <p>
-                    Grade 11 &amp; Grade 12 ·
-                    Namillangan National High School
-                </p>
-
-            </article>
-
-
-            <!-- GYMNASTICS -->
-            <article>
-
-                <div class="medal">🤸</div>
-
-                <h3>Gymnastics Achievement</h3>
-
-                <p>
-                    I started competing in gymnastics when I was in Grade 4.
-                    Since then, I have continued joining competitions and
-                    representing my school in different sporting events.
-                    I also became a CARAA qualifier and medalist.
-                </p>
-
-                <!-- GYMNASTICS PHOTO -->
-                <div class="photo-holder achievement-photo">
-                    <img src="images/gymnastics.jpg"
-                         alt="Gymnastics competition achievement" />
                 </div>
-
-            </article>
-
-
-            <!-- MILO CHEERDANCE -->
-            <article>
-
-                <div class="medal">🏆</div>
-
-                <h3>MILO Cheerdance Championship</h3>
-
-                <p>
-                    Participated in the MILO Cheerdance Championship
-                    and gained valuable experience through teamwork,
-                    dedication, and performance.
-                </p>
-
-                <!-- MILO CHEERDANCE PHOTO -->
-                <div class="photo-holder achievement-photo">
-                    <img src="images/milo-cheerdance.jpg"
-                         alt="MILO Cheerdance Championship achievement" />
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- 5. FAMILY AND FRIENDS -->
-<section class="page" data-title="Family & Friends">
-
-    <div class="card wide">
-
-        <p class="kicker">// 04 — the people behind my journey</p>
-
-        <h2>Family &amp; Friends</h2>
-
-        <p>
-            My family and friends are important parts of my life.
-            They give me support, happiness, and inspiration.
-            They make every experience more meaningful and memorable.
-        </p>
-
-        <!-- MY PARENTS -->
-        <h3>My Parents</h3>
-
-        <div class="photo-grid">
-
-            <!-- FATHER -->
-            <div class="photo-item">
-
-                <div class="photo-holder">
-                    <img src="images/father.jpg"
-                         alt="Laurence C. Segundo" />
-                </div>
-
-                <h4>Laurence C. Segundo</h4>
-                <p>Father · A hardworking father</p>
 
             </div>
 
-            <!-- MOTHER -->
-            <div class="photo-item">
 
-                <div class="photo-holder">
-                    <img src="images/mother.jpg"
-                         alt="Maricel S. Segundo" />
-                </div>
+            <!-- SIBLINGS -->
+            <h3>My Siblings</h3>
 
-                <h4>Maricel S. Segundo</h4>
-                <p>Mother · A loving mother</p>
-
+            <div class="photo-holder">
+                <img src="images/siblings.jpg" alt="My siblings group picture" />
             </div>
 
+            <p>
+                My siblings are part of my happiness and motivation.
+                We share memories and experiences that I will always treasure.
+            </p>
+
+
+            <!-- FRIENDS -->
+            <h3>My Friends</h3>
+
+            <div class="photo-holder">
+                <img src="images/friends.jpg" alt="My friends group picture" />
+            </div>
+
+            <p>
+                My friends make life more enjoyable.
+                We share laughter, experiences, and unforgettable memories together.
+            </p>
+
+
+            <!-- FAMILY MESSAGE -->
+            <blockquote>
+                “Even though we are not that poor and not that rich,
+                I will always love you. I will finish my studies
+                to give back all of your sacrifices.”
+            </blockquote>
+
         </div>
+    </section>
+
+</main>
 
 
-        <!-- MY SIBLINGS -->
-        <h3>My Siblings</h3>
+<!-- FOOTER NAVIGATION -->
+<footer class="controls">
 
-        <div class="photo-holder">
-            <img src="images/siblings.jpg"
-                 alt="My siblings group picture" />
-        </div>
+    <button class="btn ghost" id="prev" aria-label="Previous page">
+        ← Back
+    </button>
 
-        <p>
-            My siblings are part of my happiness and motivation.
-            We share memories and experiences that I will always treasure.
-        </p>
+    <span class="counter" id="counter">1 / 5</span>
 
+    <button class="btn" id="next" aria-label="Next page">
+        Next →
+    </button>
 
-        <!-- MY FRIENDS -->
-        <h3>My Friends</h3>
-
-        <div class="photo-holder">
-            <img src="images/friends.jpg"
-                 alt="My friends group picture" />
-        </div>
-
-        <p>
-            My friends make life more enjoyable. We share laughter,
-            experiences, and unforgettable memories together.
-        </p>
+</footer>
 
 
-        <!-- MESSAGE -->
-        <blockquote>
-            "Even though we are not that poor and not that rich,
-            I will always love you. I will finish my studies to
-            give back all of your sacrifices."
-        </blockquote>
+<!-- JAVASCRIPT -->
+<script src="script.js"></script>
 
-    </div>
-
-</section>
+</body>
+</html>
