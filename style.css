@@ -818,3 +818,46 @@ blockquote {
         max-height: 120px;
     }
 }
+
+/* PAGE NAVIGATION FIX */
+
+.controls {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px clamp(1rem, 4vw, 3rem);
+    background: rgba(22, 36, 26, 0.95);
+}
+
+.controls .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    min-height: 45px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.controls .counter {
+    display: block;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    .controls {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .controls .btn {
+        min-width: 90px;
+        padding: 10px;
+        font-size: 13px;
+    }
+}
