@@ -248,6 +248,10 @@ a {
   max-width: 900px;
 }
 
+.card.extra-wide {
+  max-width: 980px;
+}
+
 .card.no-scroll {
   max-height: none;
   overflow-y: visible;
@@ -451,62 +455,36 @@ a {
   font-size: .95rem;
 }
 
-/* Horizontal Family & Friends Layout */
+/* Extra-Wide Horizontal Family & Friends Layout */
 .horizontal-people-layout {
-  display: flex;
-  gap: 1.2rem;
-  justify-content: space-between;
-  align-items: stretch;
-  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.group-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.2);
+.person-card {
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 0.8rem;
-}
-
-.group-label {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--leaf);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.6rem;
+  padding: 1rem;
   text-align: center;
-}
-
-.row-cards {
   display: flex;
-  gap: 0.6rem;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex: 1;
 }
 
-.row-cards figure {
-  flex: 1;
-  text-align: center;
-}
-
-.row-cards img, 
-.row-cards .photo-placeholder {
-  width: 100%;
-  max-width: 95px;
-  aspect-ratio: 1;
+.person-card img,
+.person-card .photo-placeholder {
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 50%;
   border: 2px solid var(--rice);
-  display: block;
-  margin: 0 auto 0.4rem;
+  margin-bottom: 0.8rem;
 }
 
-.row-cards .photo-placeholder {
+.person-card .photo-placeholder {
   border-style: dashed;
   border-color: var(--muted);
   background: rgba(0, 0, 0, 0.3);
@@ -514,25 +492,40 @@ a {
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  text-align: center;
   padding: 0.2rem;
 }
 
-.row-cards strong {
-  display: block;
+.person-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.person-tag {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--leaf);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.person-card strong {
   font-family: 'Fraunces', serif;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.2;
 }
 
-.row-cards span {
+.person-card span:not(.person-tag) {
   color: var(--muted);
   font-size: 0.75rem;
 }
 
 .compact-quote {
-  margin-top: 1rem;
-  padding: 0.8rem 1rem;
+  margin-top: 1.2rem;
+  padding: 0.9rem 1.2rem;
   border-left: 3px solid var(--rice);
   background: rgba(216, 180, 90, 0.08);
   border-radius: 0 10px 10px 0;
@@ -576,15 +569,14 @@ a {
   font-size: .85rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .home { flex-direction: column; text-align: center; gap: 1.2rem; }
   .contacts { justify-content: center; }
   .contacts a span { display: none; }
   .contacts a { padding: .7rem; }
   .btn { padding: .75rem 1.2rem; font-size: .9rem; }
   .horizontal-people-layout {
-    flex-direction: column;
-    gap: 0.8rem;
+    grid-template-columns: repeat(2, 1fr);
   }
   .card.no-scroll {
     max-height: 82vh;
