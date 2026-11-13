@@ -8,7 +8,596 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg: #16241a;
+      --ink: #f3ead8;
+      --muted: #b9b29f;
+      --rice: #d8b45a;
+      --leaf: #8fbf7a;
+      --card: rgba(22, 36, 26, 0.90);
+      --line: rgba(243, 234, 216, 0.14);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 70% 10%, #2a3f2c 0%, var(--bg) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .terraces {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 45vh;
+      z-index: 0;
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .topbar, .controls {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem clamp(1rem, 3vw, 2.5rem);
+      flex-shrink: 0;
+    }
+
+    .brand {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: -.02em;
+    }
+
+    .dot {
+      color: var(--rice);
+    }
+
+    .dots {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid var(--muted);
+      background: transparent;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .dots button.on {
+      background: var(--rice);
+      border-color: var(--rice);
+      width: 28px;
+      border-radius: 6px;
+    }
+
+    .deck {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem clamp(1rem, 4vw, 3rem);
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    .page.from-right {
+      animation: inR .4s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .page.from-left {
+      animation: inL .4s cubic-bezier(.2,.8,.2,1);
+    }
+
+    @keyframes inR {
+      from { opacity: 0; transform: translateX(40px); }
+    }
+
+    @keyframes inL {
+      from { opacity: 0; transform: translateX(-40px); }
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--leaf);
+      font-size: .75rem;
+      margin-bottom: .3rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-weight: 900;
+      margin-bottom: .8rem;
+      letter-spacing: -.02em;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--rice);
+      text-decoration: none;
+    }
+
+    /* Home */
+    .home {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      max-width: 950px;
+      width: 100%;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+
+    .photo-frame {
+      flex-shrink: 0;
+      width: clamp(140px, 22vw, 220px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      padding: 6px;
+      background: conic-gradient(var(--rice), var(--leaf), var(--rice));
+      box-shadow: 0 15px 40px rgba(0,0,0,.4);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--bg);
+      display: block;
+    }
+
+    .role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(.9rem, 1.8vw, 1.2rem);
+      margin-top: .6rem;
+      color: var(--rice);
+    }
+
+    .caret {
+      color: var(--leaf);
+    }
+
+    .blink {
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .contacts {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.2rem;
+    }
+
+    .contacts a {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem .85rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.25);
+      color: var(--ink);
+      font-size: .85rem;
+      transition: .25s;
+    }
+
+    .contacts a:hover {
+      border-color: var(--rice);
+      color: var(--rice);
+      transform: translateY(-2px);
+    }
+
+    .contacts svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Cards */
+    .card {
+      width: 100%;
+      max-width: 820px;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(1.2rem, 3vw, 2.2rem);
+      box-shadow: 0 25px 70px rgba(0,0,0,.4);
+    }
+
+    .card.wide {
+      max-width: 920px;
+    }
+
+    .info {
+      display: grid;
+      gap: 0;
+      margin-bottom: 1rem;
+    }
+
+    .info div {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      padding: .45rem 0;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .info dt {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .info dd {
+      font-size: .95rem;
+    }
+
+    .tags {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .6rem;
+    }
+
+    .tags li {
+      padding: .4rem .8rem;
+      border-radius: 10px;
+      background: rgba(216,180,90,.12);
+      border: 1px solid rgba(216,180,90,.3);
+      font-size: .9rem;
+    }
+
+    .school {
+      padding: .9rem 1.1rem;
+      border-radius: 12px;
+      background: rgba(143,191,122,.1);
+      border: 1px solid rgba(143,191,122,.3);
+      margin-bottom: 1rem;
+    }
+
+    .school p {
+      color: var(--muted);
+      margin-top: .2rem;
+      font-size: .9rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      background: var(--leaf);
+      color: var(--bg);
+      padding: .15rem .5rem;
+      border-radius: 4px;
+      margin-bottom: .4rem;
+    }
+
+    .honors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: .8rem;
+      margin-top: .6rem;
+    }
+
+    .cert-card {
+      padding: .9rem;
+      border-radius: 12px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      text-align: center;
+    }
+
+    /* Larger Placeholder */
+    .cert-placeholder {
+      width: 100%;
+      height: 155px;
+      border-radius: 8px;
+      border: 2px dashed var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .85rem;
+      background: rgba(0,0,0,.15);
+      overflow: hidden;
+    }
+
+    .cert-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .timeline {
+      list-style: none;
+      border-left: 2px solid var(--rice);
+      padding-left: 1.2rem;
+      display: grid;
+      gap: .8rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline li {
+      position: relative;
+    }
+
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: calc(-1.2rem - 6px);
+      top: .3rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--rice);
+    }
+
+    .yr {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--rice);
+      font-size: .75rem;
+    }
+
+    .timeline strong {
+      font-size: 1rem;
+    }
+
+    .timeline p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .awards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .awards article {
+      padding: 1.1rem;
+      border-radius: 14px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid var(--line);
+      transition: .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .medal {
+      font-size: 2rem;
+      margin-bottom: .2rem;
+    }
+
+    /* Larger Award Photo Placeholder */
+    .award-photo {
+      width: 100%;
+      height: 155px;
+      border-radius: 8px;
+      border: 2px dashed var(--line);
+      margin: .6rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .85rem;
+      background: rgba(0,0,0,.2);
+      overflow: hidden;
+    }
+
+    .award-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .awards p {
+      color: var(--muted);
+      margin-top: .3rem;
+      font-size: .85rem;
+    }
+
+    .family-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .8rem;
+      margin-top: .6rem;
+    }
+
+    .family-group {
+      background: rgba(0,0,0,.2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .8rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .family-group h3 {
+      color: var(--leaf);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: .5rem;
+    }
+
+    .people-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .people-grid figure {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Larger Family & Friend Placeholders */
+    .people-grid img, .photo-placeholder {
+      width: 100%;
+      height: 125px;
+      max-width: 125px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid var(--rice);
+      display: block;
+      margin: 0 auto .4rem;
+    }
+
+    .photo-placeholder {
+      border-style: dashed;
+      border-color: var(--muted);
+      background: rgba(0,0,0,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+      padding: .3rem;
+    }
+
+    .people-grid strong {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: .95rem;
+      line-height: 1.2;
+    }
+
+    .people-grid span {
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    blockquote {
+      margin-top: 1rem;
+      padding: .8rem 1.1rem;
+      border-left: 3px solid var(--rice);
+      background: rgba(216,180,90,.08);
+      border-radius: 0 10px 10px 0;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: .95rem;
+      line-height: 1.4;
+    }
+
+    /* Controls */
+    .btn {
+      font: 600 .95rem 'Outfit', sans-serif;
+      padding: .7rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--rice);
+      color: var(--bg);
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(216,180,90,.35);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .btn:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+
+    .counter {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    @media (max-width: 768px) {
+      .home { flex-direction: column; text-align: center; gap: 1rem; padding: 1.2rem; }
+      .contacts { justify-content: center; }
+      .contacts a span { display: none; }
+      .contacts a { padding: .6rem; }
+      .family-container { grid-template-columns: 1fr; gap: .6rem; }
+      .awards { grid-template-columns: 1fr; gap: .8rem; }
+      .honors-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
   <!-- Background: Ifugao rice terraces -->
@@ -65,7 +654,7 @@
         <p class="kicker">// 01 — personal info</p>
         <h2>About Me</h2>
         <dl class="info">
-          <div><dt>Name</dt><dd>Laurence Segundo Jr.</dd></div>
+          <div><dt>Name</dt><dd><strong>Laurence Segundo Jr.</strong></dd></div>
           <div><dt>Age</dt><dd>18 years old</dd></div>
           <div><dt>Birthday</dt><dd>September 9, 2008</dd></div>
           <div><dt>From</dt><dd>Ifugao, Philippines</dd></div>
@@ -102,22 +691,19 @@
             <p>Kept up strong grades through graduation.</p>
           </li>
         </ul>
-
-        <h3>Honors &amp; Certificates</h3>
+        <h3>Certificates</h3>
         <div class="honors-grid">
           <div class="cert-card">
             <div class="cert-placeholder">
               <span>Grade 11 Cert Photo</span>
             </div>
             <strong>Grade 11 Certificate</strong>
-            <p style="color:var(--muted); font-size:.85rem;">With Honors Award</p>
           </div>
           <div class="cert-card">
             <div class="cert-placeholder">
               <span>Grade 12 Cert Photo</span>
             </div>
             <strong>Grade 12 Certificate</strong>
-            <p style="color:var(--muted); font-size:.85rem;">With Honors Award</p>
           </div>
         </div>
       </div>
@@ -132,23 +718,22 @@
           <article>
             <div class="medal">📣</div>
             <h3>MILO Cheerdance Champion</h3>
-            <p><strong>MILO Cheerdance Competition 2026</strong> · Lingayen City</p>
+            <p><strong>MILO Cheerdance 2026</strong> · Lingayen</p>
             <div class="award-photo">
               <span>Milo Champion Photo</span>
             </div>
-            <p>First Place Champion in the regional cheerdance tournament in Lingayen City.</p>
           </article>
           <article>
             <div class="medal">🏆</div>
             <h3>Best in Athlete Award</h3>
-            <p>Grade 11 &amp; Grade 12 · Namillangan National High School</p>
-            <p style="margin-top: 1rem;">Awarded for exceptional performance across high school athletic competitions.</p>
+            <p>Grade 11 &amp; 12 · Namillangan NHS</p>
+            <p style="margin-top: .4rem;">Awarded for exceptional performance across high school athletics.</p>
           </article>
           <article>
             <div class="medal">🤸</div>
-            <h3>CARAA Medalist · Gymnastics</h3>
-            <p>Cordillera Administrative Region Athletic Association</p>
-            <p style="margin-top: 1rem;">Competed in gymnastics at the CARAA meet, winning medals several times since Grade 4.</p>
+            <h3>CARAA Medalist</h3>
+            <p>Cordillera Athletic Association</p>
+            <p style="margin-top: .4rem;">Competed in gymnastics at CARAA, winning medals since Grade 4.</p>
           </article>
         </div>
       </div>
@@ -159,41 +744,35 @@
       <div class="card wide">
         <p class="kicker">// 04 — family &amp; friends</p>
         <h2>Family &amp; Friends</h2>
-
-        <div class="family-section">
-          <h3>Parents</h3>
-          <div class="people-grid">
-            <figure>
-              <img src="images/father.jpg" alt="Laurence C. Segundo" />
-              <figcaption><strong>Laurence C. Segundo</strong><span>Father · Farmer</span></figcaption>
-            </figure>
-            <figure>
-              <img src="images/mother.jpg" alt="Maricel S. Segundo" />
-              <figcaption><strong>Maricel S. Segundo</strong><span>Mother · Government Employee</span></figcaption>
-            </figure>
+        <div class="family-container">
+          <div class="family-group">
+            <h3>Parents</h3>
+            <div class="people-grid">
+              <figure>
+                <img src="images/father.jpg" alt="Laurence C. Segundo" />
+                <figcaption><strong>Laurence C. Segundo</strong><span>Father · Farmer</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="family-group">
+            <h3>Mother</h3>
+            <div class="people-grid">
+              <figure>
+                <img src="images/mother.jpg" alt="Maricel S. Segundo" />
+                <figcaption><strong>Maricel S. Segundo</strong><span>Mother · Gov. Employee</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="family-group">
+            <h3>Sibling &amp; Friend</h3>
+            <div class="people-grid">
+              <figure>
+                <div class="photo-placeholder">Placeholder</div>
+                <figcaption><strong>Sibling / Friend</strong><span>Close Relation</span></figcaption>
+              </figure>
+            </div>
           </div>
         </div>
-
-        <div class="family-section">
-          <h3>Sibling</h3>
-          <div class="people-grid">
-            <figure>
-              <div class="photo-placeholder">Sibling Photo</div>
-              <figcaption><strong>Sibling Name</strong><span>Brother / Sister</span></figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="family-section">
-          <h3>Friend</h3>
-          <div class="people-grid">
-            <figure>
-              <div class="photo-placeholder">Friend Photo</div>
-              <figcaption><strong>Friend Name</strong><span>Close Friend</span></figcaption>
-            </figure>
-          </div>
-        </div>
-
         <blockquote>
           “Even though we are not that poor and not that rich, I will always love you. I will finish my studies to give back all of your sacrifices.”
         </blockquote>
@@ -204,9 +783,66 @@
   <footer class="controls">
     <button class="btn ghost" id="prev" aria-label="Previous page">← Back</button>
     <span class="counter" id="counter">1 / 5</span>
-    <button class="btn" id="next" aria-label="Next page">Next →</button>
+    <button class="btn" id="next" aria-label="Next page">Get to know me →</button>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    const pages = [...document.querySelectorAll('.page')];
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const counter = document.getElementById('counter');
+    const dots = document.querySelector('.dots');
+    let current = 0;
+
+    pages.forEach((p, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', p.dataset.title);
+      b.title = p.dataset.title;
+      b.addEventListener('click', () => go(i));
+      dots.appendChild(b);
+    });
+
+    function go(i) {
+      if (i < 0 || i >= pages.length || i === current) return;
+      const dir = i > current ? 'from-right' : 'from-left';
+      pages[current].classList.remove('active', 'from-right', 'from-left');
+      current = i;
+      pages[current].classList.add('active', dir);
+      update();
+    }
+
+    function update() {
+      counter.textContent = `${current + 1} / ${pages.length}`;
+      prev.disabled = current === 0;
+      next.textContent = current === pages.length - 1 ? '↺ Start Over' : current === 0 ? 'Get to know me →' : 'Next →';
+      [...dots.children].forEach((d, i) => d.classList.toggle('on', i === current));
+    }
+
+    next.addEventListener('click', () => go(current === pages.length - 1 ? 0 : current + 1));
+    prev.addEventListener('click', () => go(current - 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next.click();
+      if (e.key === 'ArrowLeft') go(current - 1);
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) go(current + 1);
+        else go(current - 1);
+      }
+    }, { passive: true });
+
+    update();
+  </script>
 </body>
 </html>
