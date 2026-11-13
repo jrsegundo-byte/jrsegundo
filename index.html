@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Laurence Segundo Jr. — Portfolio</title>
-    <meta name="description" content="Portfolio of Laurence Segundo Jr.">
+    <title>Laurence Segundo Jr. | Portfolio</title>
+    <meta name="description" content="Personal portfolio of Laurence Segundo Jr.">
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -16,18 +17,20 @@
     <!-- HEADER -->
     <header class="topbar">
         <h1>LAURENCE SEGUNDO JR.</h1>
-        <nav class="dots" aria-label="Portfolio pages"></nav>
+        <nav class="dots" aria-label="Portfolio navigation"></nav>
     </header>
 
     <!-- MAIN CONTENT -->
     <main class="deck">
 
-        <!-- HOME PAGE -->
+        <!-- 1. HOME PAGE -->
         <section class="page active" data-title="Home">
             <div class="card home-card">
+
                 <p class="kicker">// WELCOME TO MY PORTFOLIO</p>
 
-                <h2>Hello, I'm<br>
+                <h2>
+                    Hello, I'm<br>
                     <span>Laurence Segundo Jr.</span>
                 </h2>
 
@@ -37,28 +40,33 @@
                     my skills.
                 </p>
 
-                <p class="small-text">WELCOME TO MY PERSONAL WEBSITE</p>
+                <p class="small-text">
+                    WELCOME TO MY PERSONAL WEBSITE
+                </p>
+
             </div>
         </section>
 
-        <!-- ABOUT ME PAGE -->
+        <!-- 2. ABOUT ME -->
         <section class="page" data-title="About Me">
             <div class="card">
+
                 <p class="kicker">// 01 — PERSONAL INFORMATION</p>
 
                 <h2>About Me</h2>
 
                 <div class="profile">
+
                     <img
                         src="images/Me.jpg"
                         alt="Photo of Laurence Segundo Jr."
-                        onerror="this.style.display='none'"
                     >
 
                     <div>
                         <h3>Laurence Segundo Jr.</h3>
                         <p>Grade 12 HUMSS Student</p>
                     </div>
+
                 </div>
 
                 <p>
@@ -69,18 +77,21 @@
                 </p>
 
                 <h3>Personal Information</h3>
+
                 <ul>
                     <li><strong>Name:</strong> Laurence Segundo Jr.</li>
                     <li><strong>School:</strong> Namillangan National High School</li>
                     <li><strong>Strand:</strong> HUMSS</li>
                     <li><strong>Grade Level:</strong> Grade 12</li>
                 </ul>
+
             </div>
         </section>
 
-        <!-- ACHIEVEMENTS PAGE -->
+        <!-- 3. ACHIEVEMENTS -->
         <section class="page" data-title="Achievements">
             <div class="card">
+
                 <p class="kicker">// 02 — MY ACHIEVEMENTS</p>
 
                 <h2>Achievements</h2>
@@ -89,6 +100,28 @@
                     These are some of the experiences and achievements
                     that helped me grow as a student and an athlete.
                 </p>
+
+                <div class="photo-grid">
+
+                    <div class="photo-item">
+                        <img src="images/gymnastics.jpg"
+                             alt="Gymnastics achievement photo">
+                        <p>Gymnastics</p>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/caraa.jpg"
+                             alt="CARAA competition photo">
+                        <p>CARAA Qualifier</p>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/school-activities.jpg"
+                             alt="School activities photo">
+                        <p>School Activities</p>
+                    </div>
+
+                </div>
 
                 <div class="achievement">
                     <h3>Gymnastics</h3>
@@ -109,19 +142,37 @@
                 <div class="achievement">
                     <h3>School Activities</h3>
                     <p>
-                        I also participate in different school activities
+                        I participate in different school activities
                         that help develop my confidence and teamwork.
                     </p>
                 </div>
+
             </div>
         </section>
 
-        <!-- EDUCATION PAGE -->
+        <!-- 4. EDUCATION -->
         <section class="page" data-title="Education">
             <div class="card">
+
                 <p class="kicker">// 03 — MY EDUCATION</p>
 
                 <h2>Education</h2>
+
+                <div class="photo-grid">
+
+                    <div class="photo-item">
+                        <img src="images/school.jpg"
+                             alt="School photo">
+                        <p>My School</p>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/classroom.jpg"
+                             alt="Classroom photo">
+                        <p>School Life</p>
+                    </div>
+
+                </div>
 
                 <div class="education-item">
                     <h3>Senior High School</h3>
@@ -135,12 +186,14 @@
                     communication skills, and understanding of the
                     world around me.
                 </p>
+
             </div>
         </section>
 
-        <!-- FAMILY AND FRIENDS PAGE -->
+        <!-- 5. FAMILY AND FRIENDS -->
         <section class="page" data-title="Family & Friends">
             <div class="card">
+
                 <p class="kicker">// 04 — MY SUPPORT SYSTEM</p>
 
                 <h2>Family & Friends</h2>
@@ -150,6 +203,22 @@
                     They give me support, motivation, and encouragement
                     as I continue working toward my goals.
                 </p>
+
+                <div class="photo-grid">
+
+                    <div class="photo-item">
+                        <img src="images/family.jpg"
+                             alt="Family photo">
+                        <p>My Family</p>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/friends.jpg"
+                             alt="Friends photo">
+                        <p>My Friends</p>
+                    </div>
+
+                </div>
 
                 <div class="family-item">
                     <h3>My Family</h3>
@@ -166,6 +235,7 @@
                         shared memories, laughter, and experiences.
                     </p>
                 </div>
+
             </div>
         </section>
 
@@ -173,17 +243,22 @@
 
     <!-- NAVIGATION BUTTONS -->
     <footer class="controls">
-        <button id="prev" class="btn ghost" type="button">
+
+        <button id="prev" class="btn ghost" type="button" disabled>
             ← Back
         </button>
 
-        <span id="counter" class="counter">1 / 5</span>
+        <span id="counter" class="counter" aria-live="polite">
+            1 / 5
+        </span>
 
         <button id="next" class="btn" type="button">
             Get to know me →
         </button>
+
     </footer>
 
 </body>
 </html>
+
 
