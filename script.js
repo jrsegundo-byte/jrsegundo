@@ -1,24 +1,23 @@
 
+document.addEventListener('DOMContentLoaded', () => {
 
+    // GET PORTFOLIO ELEMENTS
+    const pages = [...document.querySelectorAll('.page')];
 
-// GET ALL PORTFOLIO ELEMENTS
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const counter = document.getElementById('counter');
+    const dots = document.querySelector('.dots');
 
-const pages = [...document.querySelectorAll('.page')];
+    let current = 0;
 
-const prev = document.getElementById('prev');
-const next = document.getElementById('next');
-const counter = document.getElementById('counter');
-const dots = document.querySelector('.dots');
-
-let current = 0;
-
-
-// CHECK IF ELEMENTS EXIST
-
-if (pages.length && prev && next && counter && dots) {
+    // CHECK REQUIRED ELEMENTS
+    if (!pages.length || !prev || !next || !counter || !dots) {
+        console.error('Portfolio navigation elements are missing.');
+        return;
+    }
 
     // CREATE NAVIGATION DOTS
-
     pages.forEach((page, index) => {
 
         const button = document.createElement('button');
@@ -40,16 +39,14 @@ if (pages.length && prev && next && counter && dots) {
 
     });
 
-
     // CHANGE PAGE
-
     function go(index) {
 
-        if (
-            index < 0 ||
-            index >= pages.length ||
-            index === current
-        ) {
+        if (index < 0 || index >= pages.length) {
+            return;
+        }
+
+        if (index === current) {
             return;
         }
 
@@ -69,8 +66,7 @@ if (pages.length && prev && next && counter && dots) {
             direction
         );
 
-        // RESET CARD POSITION
-
+        // RESET CARD SCROLL POSITION
         const card = pages[current].querySelector('.card');
 
         if (card) {
@@ -81,9 +77,7 @@ if (pages.length && prev && next && counter && dots) {
 
     }
 
-
     // UPDATE NAVIGATION
-
     function update() {
 
         counter.textContent =
@@ -105,8 +99,7 @@ if (pages.length && prev && next && counter && dots) {
 
         }
 
-        // UPDATE DOTS
-
+        // UPDATE NAVIGATION DOTS
         [...dots.children].forEach((dot, index) => {
 
             dot.classList.toggle(
@@ -123,9 +116,7 @@ if (pages.length && prev && next && counter && dots) {
 
     }
 
-
     // NEXT BUTTON
-
     next.addEventListener('click', () => {
 
         if (current === pages.length - 1) {
@@ -136,18 +127,14 @@ if (pages.length && prev && next && counter && dots) {
 
     });
 
-
     // BACK BUTTON
-
     prev.addEventListener('click', () => {
 
         go(current - 1);
 
     });
 
-
     // KEYBOARD NAVIGATION
-
     document.addEventListener('keydown', (event) => {
 
         if (
@@ -175,9 +162,14 @@ if (pages.length && prev && next && counter && dots) {
 
     });
 
-
-    // INITIALIZE WEBSITE
-
+    // INITIALIZE PORTFOLIO
     update();
 
-}
+});
+
+
+
+
+
+
+   
