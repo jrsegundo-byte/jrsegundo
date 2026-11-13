@@ -21,7 +21,7 @@ body {
 .topbar, .controls { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem clamp(1rem, 4vw, 3rem); }
 .brand { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.4rem; letter-spacing: -.02em; }
 .dot { color: var(--rice); }
-.dots { display: flex; gap: .5rem; }
+.dots { display: flex; gap: .5rem; flex-wrap: wrap; max-width: 250px; justify-content: flex-end; }
 .dots button { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--muted); background: transparent; cursor: pointer; transition: .3s; }
 .dots button.on { background: var(--rice); border-color: var(--rice); width: 28px; border-radius: 6px; }
 
@@ -85,6 +85,13 @@ a { color: var(--rice); text-decoration: none; }
 .parents strong { display: block; font-family: 'Fraunces', serif; font-size: 1.15rem; }
 .parents span { color: var(--muted); font-size: .9rem; }
 blockquote { margin-top: 1.6rem; padding: 1.2rem 1.4rem; border-left: 4px solid var(--rice); background: rgba(216,180,90,.08); border-radius: 0 14px 14px 0; font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1rem; line-height: 1.5; }
+
+/* Single Profile Styles (for Sibling & Friend) */
+.single-profile { text-align: center; }
+.single-profile img { width: 140px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 3px solid var(--rice); display: block; margin: 0 auto .8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.single-profile strong { display: block; font-family: 'Fraunces', serif; font-size: 1.25rem; }
+.single-profile span { color: var(--muted); font-size: .9rem; display: block; margin-bottom: 1.2rem; }
+.profile-desc { color: var(--muted); font-size: 1rem; line-height: 1.6; max-width: 500px; margin: 0 auto; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px; border: 1px solid var(--line); }
 
 /* Controls */
 .btn { font: 600 1rem 'Outfit', sans-serif; padding: .85rem 1.6rem; border-radius: 999px; border: none; background: var(--rice); color: var(--bg); cursor: pointer; transition: .25s; }
