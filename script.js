@@ -54,4 +54,3 @@ document.addEventListener('touchend', (e) => {
 }, { passive: true });
 
 update();
-
