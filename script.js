@@ -1,117 +1,126 @@
 
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const pages = Array.from(document.querySelectorAll(".page"));
+    const dots = document.querySelector(".dots");
+
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
     const counter = document.getElementById("counter");
-    const dots = document.querySelector(".dots");
 
-    let current = 0;
-
-    // CHECK ELEMENTS
-    if (!pages.length || !prev || !next || !counter || !dots) {
-        console.error("Missing navigation elements!");
+    if (pages.length === 0 || !prev || !next || !counter) {
+        console.error("Portfolio navigation elements are missing.");
         return;
     }
 
-    // CREATE DOTS
-    dots.innerHTML = "";
+    let current = 0;
 
-    pages.forEach((page, index) => {
+    // CREATE PAGE INDICATORS
+    if (dots) {
+        dots.innerHTML = "";
 
-        const button = document.createElement("button");
+        pages.forEach((page, index) => {
+            const dot = document.createElement("button");
 
-        button.type = "button";
-        button.title = page.dataset.title || "Page " + (index + 1);
+            dot.type = "button";
+            dot.title = page.dataset.title || `Page ${index + 1}`;
+            dot.setAttribute("aria-label", `Go to page ${index + 1}`);
 
-        button.addEventListener("click", function () {
-            go(index);
+            dot.addEventListener("click", function () {
+                goToPage(index);
+            });
+
+            dots.appendChild(dot);
         });
+    }
 
-        dots.appendChild(button);
-
-    });
-
-    // UPDATE DISPLAY
-    function update() {
+    // UPDATE PAGE DISPLAY
+    function updatePage() {
 
         pages.forEach((page, index) => {
             page.classList.toggle("active", index === current);
         });
 
-        counter.textContent = (current + 1) + " / " + pages.length;
+        counter.textContent = `${current + 1} / ${pages.length}`;
 
         prev.disabled = current === 0;
 
-        next.textContent =
-            current === pages.length - 1
-                ? "↺ Start Over"
-                : current === 0
-                    ? "Get to know me →"
-                    : "Next →";
+        if (current === pages.length - 1) {
+            next.textContent = "↺ Start Over";
+        } else if (current === 0) {
+            next.textContent = "Get to know me →";
+        } else {
+            next.textContent = "Next →";
+        }
 
-        Array.from(dots.children).forEach((dot, index) => {
-            dot.classList.toggle("on", index === current);
-            dot.setAttribute(
-                "aria-current",
-                index === current ? "page" : "false"
-            );
-        });
-
+        if (dots) {
+            Array.from(dots.children).forEach((dot, index) => {
+                dot.classList.toggle("on", index === current);
+                dot.setAttribute(
+                    "aria-current",
+                    index === current ? "page" : "false"
+                );
+            });
+        }
     }
 
-    // GO TO PAGE
-    function go(index) {
+    // GO TO A SPECIFIC PAGE
+    function goToPage(index) {
 
-        if (index < 0 || index >= pages.length) return;
-
-        const direction =
-            index > current ? "from-right" : "from-left";
-
-        pages[current].classList.remove(
-            "active", "from-right", "from-left"
-        );
+        if (index < 0 || index >= pages.length) {
+            return;
+        }
 
         current = index;
+        updatePage();
 
-        pages[current].classList.add("active", direction);
-
-        const card = pages[current].querySelector(".card");
-
-        if (card) card.scrollTop = 0;
-
-        update();
-
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     }
 
-    // NEXT
+    // NEXT BUTTON
     next.addEventListener("click", function () {
-        go(current === pages.length - 1 ? 0 : current + 1);
+
+        if (current === pages.length - 1) {
+            goToPage(0);
+        } else {
+            goToPage(current + 1);
+        }
+
     });
 
-    // BACK
+    // BACK BUTTON
     prev.addEventListener("click", function () {
-        go(current - 1);
+        goToPage(current - 1);
     });
 
-    // KEYBOARD
+    // KEYBOARD NAVIGATION
     document.addEventListener("keydown", function (event) {
 
-        if (event.target.matches("input, textarea, select")) return;
+        if (
+            event.target.matches("input, textarea, select") ||
+            event.target.isContentEditable
+        ) {
+            return;
+        }
 
         if (event.key === "ArrowRight") {
-            go(current === pages.length - 1 ? 0 : current + 1);
+            goToPage(
+                current === pages.length - 1 ? 0 : current + 1
+            );
         }
 
         if (event.key === "ArrowLeft") {
-            go(current - 1);
+            goToPage(current - 1);
         }
 
     });
 
-    // START WEBSITE
-    update();
+    // INITIALIZE
+    updatePage();
+
+    console.log("Portfolio successfully loaded!");
 
 });
