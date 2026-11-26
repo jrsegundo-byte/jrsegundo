@@ -7,12 +7,10 @@
     image.addEventListener('error', updatePhoto);
     updatePhoto();
   });
-
   const chapters = ['Homepage', 'Personal Info', 'Achievements', 'Family and Friends'];
   let page = 0;
   const previous = document.getElementById('previous-chapter');
   const next = document.getElementById('next-chapter');
-
   function showChapter(index) {
     page = Math.max(0, Math.min(chapters.length - 1, index));
     document.querySelectorAll('[data-chapter]').forEach(section => {
@@ -29,13 +27,11 @@
     document.getElementById('next-label').textContent = page === 3 ? 'Back to homepage' : 'Next chapter';
     if (document.activeElement.closest('[hidden]')) document.getElementById('main-content').focus();
   }
-
   document.querySelectorAll('[data-page]').forEach(button => {
     button.addEventListener('click', () => showChapter(Number(button.dataset.page)));
   });
   previous.addEventListener('click', () => showChapter(page - 1));
   next.addEventListener('click', () => showChapter((page + 1) % chapters.length));
-
   document.querySelectorAll('[data-person]').forEach(button => {
     button.addEventListener('click', () => {
       document.querySelectorAll('[data-person]').forEach(option => {
@@ -46,12 +42,10 @@
       });
     });
   });
-
   const birth = new Date(2008, 8, 9), today = new Date();
   let years = today.getFullYear() - birth.getFullYear();
   if (today < new Date(today.getFullYear(), 8, 9)) years--;
   document.getElementById('age').textContent = years + ' years old';
-
   window.addEventListener('keydown', event => {
     if (event.target.closest('button, a, input, textarea, select, [contenteditable]')) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
