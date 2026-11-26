@@ -42,8 +42,10 @@ svg{flex-shrink:0;vertical-align:middle}button{padding:2px 6px}button,a{-webkit-
 .journey .education-stages h3{font-size:17px}
 .photo-fallback small{display:none}
 @media(max-width:700px){.journey{display:block;overflow-y:auto}.journey-top{margin-bottom:0}.journey .achievement-content{display:grid;grid-template-rows:auto auto;padding:18px 0;border-bottom:1px solid var(--line)}.journey .achievement-photos .photo-space{aspect-ratio:4/3;height:auto;flex:none}.journey .education-stages h3{font-size:19px}}
-.journey .achievement-photos,
-.journey .achievement-photos.count-2{grid-template-columns:1fr;align-content:start;gap:10px}
-@media(min-width:701px){
-  .journey .achievement-photos .photo-space{height:clamp(90px,15vh,160px);flex:none}
+@media(min-width:701px) and (min-height:741px){
+  .info-panel{padding:24px 32px}
+  dl>div{padding:11px 0}
+}
+@media(max-width:700px){
+  .about{overflow-y:auto;align-content:start}
 }
