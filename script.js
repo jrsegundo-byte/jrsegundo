@@ -1,4 +1,3 @@
-// Navigation state stays in the browser; all portfolio content is in index.html.
 (() => {
   document.querySelectorAll('.portfolio-photo').forEach(image => {
     const updatePhoto = () => {
@@ -8,13 +7,10 @@
     image.addEventListener('error', updatePhoto);
     updatePhoto();
   });
-
   const chapters = ['Homepage', 'Personal Info', 'Achievements', 'Family and Friends'];
   let page = 0;
-  let achievement = 0;
   const previous = document.getElementById('previous-chapter');
   const next = document.getElementById('next-chapter');
-
   function showChapter(index) {
     page = Math.max(0, Math.min(chapters.length - 1, index));
     document.querySelectorAll('[data-chapter]').forEach(section => {
@@ -29,30 +25,13 @@
     document.getElementById('page-progress').style.width = `${(page + 1) * 25}%`;
     document.getElementById('chapter-name').textContent = chapters[page];
     document.getElementById('next-label').textContent = page === 3 ? 'Back to homepage' : 'Next chapter';
-    // Move focus out of content that has just been hidden.
     if (document.activeElement.closest('[hidden]')) document.getElementById('main-content').focus();
   }
-
-  function showAchievement(index) {
-    achievement = index;
-    document.querySelectorAll('[data-moment]').forEach(panel => {
-      panel.hidden = Number(panel.dataset.moment) !== achievement;
-    });
-    document.querySelectorAll('[data-achievement]').forEach(button => {
-      button.setAttribute('aria-pressed', String(Number(button.dataset.achievement) === achievement));
-    });
-    document.getElementById('moment-count').textContent = achievement + 1;
-  }
-
   document.querySelectorAll('[data-page]').forEach(button => {
     button.addEventListener('click', () => showChapter(Number(button.dataset.page)));
   });
   previous.addEventListener('click', () => showChapter(page - 1));
   next.addEventListener('click', () => showChapter((page + 1) % chapters.length));
-  document.querySelectorAll('[data-achievement]').forEach(button => {
-    button.addEventListener('click', () => showAchievement(Number(button.dataset.achievement)));
-  });
-  document.getElementById('next-moment').addEventListener('click', () => showAchievement((achievement + 1) % 4));
   document.querySelectorAll('[data-person]').forEach(button => {
     button.addEventListener('click', () => {
       document.querySelectorAll('[data-person]').forEach(option => {
@@ -63,6 +42,10 @@
       });
     });
   });
+  const birth = new Date(2008, 8, 9), today = new Date();
+  let years = today.getFullYear() - birth.getFullYear();
+  if (today < new Date(today.getFullYear(), 8, 9)) years--;
+  document.getElementById('age').textContent = years + ' years old';
   window.addEventListener('keydown', event => {
     if (event.target.closest('button, a, input, textarea, select, [contenteditable]')) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
