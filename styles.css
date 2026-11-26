@@ -30,3 +30,15 @@ svg{flex-shrink:0;vertical-align:middle}button{padding:2px 6px}button,a{-webkit-
 .journey .education-stages li{padding:11px 0}
 .journey .education-stages h3{font-size:17px}
 @media(max-width:700px){.journey{display:block;overflow-y:auto}.journey-top{margin-bottom:0}.journey .achievement-content{display:grid;grid-template-rows:auto auto;padding:18px 0;border-bottom:1px solid var(--line)}.journey .achievement-photos .photo-space{aspect-ratio:4/3;height:auto;flex:none}.journey .education-stages h3{font-size:19px}}
+.journey{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto minmax(0,1fr);column-gap:24px}
+.journey-top{grid-column:1/-1;border-bottom:1px solid var(--line);margin-bottom:6px}
+.journey .achievement-content{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:14px;padding:18px 0 0}
+.journey .achievement-copy{align-self:start}
+.journey .achievement-copy h3{font-size:22px;margin-bottom:10px}
+.journey .achievement-copy>p:not(.eyebrow){max-width:none}
+.journey .little-symbol{display:none}
+.journey .education-stages{justify-content:flex-start}
+.journey .education-stages li{padding:11px 0}
+.journey .education-stages h3{font-size:17px}
+.photo-fallback small{display:none}
+@media(max-width:700px){.journey{display:block;overflow-y:auto}.journey-top{margin-bottom:0}.journey .achievement-content{display:grid;grid-template-rows:auto auto;padding:18px 0;border-bottom:1px solid var(--line)}.journey .achievement-photos .photo-space{aspect-ratio:4/3;height:auto;flex:none}.journey .education-stages h3{font-size:19px}}
