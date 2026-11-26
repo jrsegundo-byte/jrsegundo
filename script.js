@@ -46,7 +46,57 @@
   let years = today.getFullYear() - birth.getFullYear();
   if (today < new Date(today.getFullYear(), 8, 9)) years--;
   document.getElementById('age').textContent = years + ' years old';
+  // Tap a photo to view it larger
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Photo viewer');
+  box.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close photo">&times;</button><img alt=""><p></p>';
+  document.body.appendChild(box);
+  const boxImg = box.querySelector('img');
+  const boxCaption = box.querySelector('p');
+  let lastFocus = null;
+
+  function openPhoto(space) {
+    const img = space.querySelector('.portfolio-photo');
+    const caption = space.closest('figure') && space.closest('figure').querySelector('figcaption');
+    const title = caption && (caption.querySelector('h3') || caption);
+    boxImg.src = img.currentSrc || img.src;
+    boxImg.alt = img.alt;
+    boxCaption.textContent = title ? title.textContent : img.alt;
+    lastFocus = document.activeElement;
+    box.classList.add('open');
+    box.querySelector('button').focus();
+  }
+  function closePhoto() {
+    box.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  box.addEventListener('click', closePhoto);
+
+  document.querySelectorAll('.photo-space').forEach(space => {
+    const img = space.querySelector('.portfolio-photo');
+    if (!img) return;
+    space.setAttribute('role', 'button');
+    space.tabIndex = 0;
+    space.setAttribute('aria-label', 'View larger: ' + img.alt);
+    space.addEventListener('click', () => {
+      if (space.classList.contains('has-photo')) openPhoto(space);
+    });
+    space.addEventListener('keydown', event => {
+      if ((event.key === 'Enter' || event.key === ' ') && space.classList.contains('has-photo')) {
+        event.preventDefault();
+        openPhoto(space);
+      }
+    });
+  });
+
   window.addEventListener('keydown', event => {
+    if (box.classList.contains('open')) {
+      if (event.key === 'Escape') closePhoto();
+      return;
+    }
     if (event.target.closest('button, a, input, textarea, select, [contenteditable]')) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
       event.preventDefault();
