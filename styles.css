@@ -29,7 +29,7 @@ svg{flex-shrink:0;vertical-align:middle}button{padding:2px 6px}button,a{-webkit-
 .journey .education-stages{justify-content:flex-start}
 .journey .education-stages li{padding:11px 0}
 .journey .education-stages h3{font-size:17px}
-@media(max-width:700px){.journey{display:block;overflow-y:auto}.journey-top{margin-bottom:0}.journey .achievement-content{display:grid;grid-template-rows:auto auto;padding:18px 0;border-bottom:1px solid var(--line)}.journey .achievement-photos .photo-space{aspect-ratio:4/3;height:auto;flex:none}.journey .education-stages h3{font-size:19px}}
+@media(max-width:700px){.journey{display:block;overflow-y:auto}.journey-top{margin-bottom:0}.journey .achievement-content{display:grid;grid-template-rows:auto auto;padding:18px 0;border-bottom:1px solid var(--line)}.journey .achievement-photos .photo-space{aspect-ratio:16/9;height:auto;flex:none}.journey .education-stages h3{font-size:19px}}
 
 /* Info panel spacing for the extra rows */
 @media(min-width:701px) and (min-height:741px){.info-panel{padding:24px 32px}dl>div{padding:11px 0}}
@@ -41,7 +41,8 @@ svg{flex-shrink:0;vertical-align:middle}button{padding:2px 6px}button,a{-webkit-
   .journey .achievement-copy{min-height:150px}
   .journey .achievement-photos,
   .journey .achievement-photos.count-2{grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr));align-content:stretch;gap:10px}
-  .journey .achievement-photos .photo-space{height:auto;flex:1;min-height:80px}
+  .journey .achievement-photos{container-type:size}
+  .journey .achievement-photos .photo-space{flex:none;height:auto;min-height:0;aspect-ratio:16/9;width:min(100cqw,calc((50cqh - 33px) * 16 / 9))}
 }
 
 /* Tap a photo to zoom in */
